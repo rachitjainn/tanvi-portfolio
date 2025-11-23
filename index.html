@@ -1,1 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanvi Agarwal - Visual Communication Designer</title>
+    <meta name="description" content="Visual Communication Designer specializing in branding, packaging, and visual identity. Experience at Cradlewise Inc.">
+    
+    <!-- Open Graph / Social Media Preview -->
+    <meta property="og:title" content="Tanvi Agarwal - Visual Communication Designer">
+    <meta property="og:description" content="Crafting visuals that tell stories and solve problems. Specializing in branding, packaging, and visual identity.">
+    <meta property="og:image" content="https://mir-s3-cdn-cf.behance.net/projects/404/2869bb172185313.Y3JvcCwxOTIwLDE1MDEsMCwyMDk.jpg">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0A0A0A;
+            --secondary-color: #F5F5F5;
+            --accent-color: #6366F1;
+            --accent-hover: #4F46E5;
+            --text-primary: #0A0A0A;
+            --text-secondary: #6B6B6B;
+            --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--secondary-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--accent-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 4rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.3s;
+            letter-spacing: -3px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.6s;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Background Elements */
+        .floating-bg {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-bg:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-color);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-bg:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: #EC4899;
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .floating-bg:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: #10B981;
+            top: 50%;
+            left: 50%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(30px, 50px) scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 20px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
+            filter: grayscale(20%);
+        }
+
+        /* Experience Section */
+        .experience {
+            background: var(--primary-color);
+            color: white;
+            padding: 8rem 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .experience-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .experience-item {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .experience-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 4rem;
+            background: white;
+        }
+
+        .projects-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            height: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            transform: translateY(60%);
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 4rem;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 2rem 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 40px;
+            border: 2px solid var(--text-primary);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 8px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes scroll {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 24px; opacity: 0; }
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav, .hero, .about, .experience, .projects, .skills, .contact {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                height: 400px;
+            }
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.95); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-text">TA</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Tanvi Agarwal</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-bg"></div>
+        <div class="floating-bg"></div>
+        <div class="floating-bg"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Visual Communication Designer</h1>
+            <p class="hero-subtitle">Crafting visuals that tell stories and solve problems.<br>Where last-minute ideas become unforgettable brands.</p>
+            <div class="hero-cta">
+                <a href="#work" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about reveal" id="about">
+        <div class="about-content">
+            <h2>Hello, I'm Tanvi</h2>
+            <p>I'm a Visual Communication Designer with experience in crafting visuals that tell stories and solve problems. I'm all about simplifying design challenges and turning visuals into captivating narratives.</p>
+            <p>I believe in designs that seamlessly integrate, aiming for simplicity to elevate the overall experience. Currently based in India, I've had the privilege of working with companies like Cradlewise Inc. in San Francisco, creating impactful branding and packaging solutions.</p>
+            <p>My approach combines strategic thinking with aesthetic excellence, ensuring every project not only looks beautiful but serves its purpose effectively.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">11K+</span>
+                    <span class="stat-label">Project Views</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Appreciations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">123+</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Tanvi Agarwal">
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience reveal" id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-grid">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Visual Communication Designer</h3>
+                        <p class="experience-company">Cradlewise Inc.</p>
+                    </div>
+                    <span class="experience-date">2022 - Present</span>
+                </div>
+                <p class="experience-description">Leading visual communication initiatives for a San Francisco-based innovative company. Developing comprehensive brand identities, designing marketing materials, and creating cohesive visual systems that enhance user experience and brand recognition.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Graphic Designer</h3>
+                        <p class="experience-company">Deskraft Innovation</p>
+                    </div>
+                    <span class="experience-date">2020 - 2022</span>
+                </div>
+                <p class="experience-description">Crafted compelling visual solutions across multiple platforms. Specialized in brand identity, packaging design, and digital marketing materials. Collaborated with cross-functional teams to deliver high-impact design projects.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Graphic Designer</h3>
+                        <p class="experience-company">Ekam Innovations</p>
+                    </div>
+                    <span class="experience-date">2019 - 2020</span>
+                </div>
+                <p class="experience-description">Developed creative design solutions for various clients. Focused on branding, packaging, and visual identity projects. Built a strong foundation in design principles and client communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects reveal" id="work">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid">
+            <a href="https://www.behance.net/gallery/172185313/AMRIT-GIR-Branding-Packaging" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/2869bb172185313.Y3JvcCwxOTIwLDE1MDEsMCwyMDk.jpg" alt="AMRIT GIR" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Branding & Packaging</span>
+                    <h3 class="project-title">AMRIT GIR</h3>
+                    <p class="project-description">Complete brand identity and packaging design for premium dairy products. Celebrating authenticity and tradition.</p>
+                    <div class="project-stats">
+                        <span>👁 273 views</span>
+                        <span>❤️ 13 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/203849603/ELIXIR-Skincare-Brand-Identity" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/db8976203849603.Y3JvcCw5MjQsNzIzLDAsMA.jpg" alt="ELIXIR" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Brand Identity</span>
+                    <h3 class="project-title">ELIXIR</h3>
+                    <p class="project-description">Luxurious skincare brand identity that embodies elegance and natural beauty. Clean, modern, and sophisticated.</p>
+                    <div class="project-stats">
+                        <span>👁 166 views</span>
+                        <span>❤️ 5 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/204044421/VIBECRAFTS-Visual-Identity" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e4cd7e204044421.Y3JvcCwxMDgwLDg0NCwwLDk3.png" alt="VIBECRAFTS" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Visual Identity</span>
+                    <h3 class="project-title">VIBECRAFTS</h3>
+                    <p class="project-description">Dynamic visual identity for a creative studio. Bold, vibrant, and full of energy.</p>
+                    <div class="project-stats">
+                        <span>👁 164 views</span>
+                        <span>❤️ 3 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/180532163/CURIO-COUTURE-Brand-Identity" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/38f3bb180532163.Y3JvcCw4MDgsNjMyLDI4Myw3OA.png" alt="CURIO COUTURE" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Brand Identity</span>
+                    <h3 class="project-title">CURIO COUTURE</h3>
+                    <p class="project-description">Elegant fashion brand identity that captures sophistication and timeless style.</p>
+                    <div class="project-stats">
+                        <span>👁 208 views</span>
+                        <span>❤️ 7 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/180574851/INDIGO-ELEVATE-Brand-identity" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/889df8180574851.Y3JvcCwxMDgwLDg0NCwwLDMz.png" alt="INDIGO ELEVATE" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Brand Identity</span>
+                    <h3 class="project-title">INDIGO ELEVATE</h3>
+                    <p class="project-description">Modern brand identity for an airline company, emphasizing trust and premium service.</p>
+                    <div class="project-stats">
+                        <span>👁 223 views</span>
+                        <span>❤️ 12 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/180586575/KAVYA-Brand-Identity" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/98fc31180586575.Y3JvcCw4MDgsNjMyLDI4Myw3OA.png" alt="KAVYA" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Brand Identity</span>
+                    <h3 class="project-title">KAVYA</h3>
+                    <p class="project-description">Refined brand identity celebrating Indian heritage with contemporary aesthetics.</p>
+                    <div class="project-stats">
+                        <span>👁 198 views</span>
+                        <span>❤️ 8 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/186074817/LAYS-Celebrating-flavours-of-India" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/d89b35186074817.Y3JvcCw4MDgsNjMyLDI4Myw3OA.jpg" alt="LAYS India" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Art Direction</span>
+                    <h3 class="project-title">LAYS - Celebrating Flavours</h3>
+                    <p class="project-description">Creative campaign celebrating the diverse flavours of India through vibrant visuals.</p>
+                    <div class="project-stats">
+                        <span>👁 185 views</span>
+                        <span>❤️ 8 appreciations</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/185915165/Power-Gummies-Packaging" target="_blank" class="project-card">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/d6ebed185915165.Y3JvcCw4MDgsNjMyLDI4Myw3OA.jpg" alt="Power Gummies" class="project-image">
+                <div class="project-overlay">
+                    <span class="project-tag">Packaging Design</span>
+                    <h3 class="project-title">Power Gummies</h3>
+                    <p class="project-description">Fun and vibrant packaging design for health supplements targeting young adults.</p>
+                    <div class="project-stats">
+                        <span>👁 178 views</span>
+                        <span>❤️ 7 appreciations</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills reveal" id="skills">
+        <div class="skills-container">
+            <h2 class="section-title">Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Graphic Design</h3>
+                    <ul class="skill-list">
+                        <li>Brand Identity</li>
+                        <li>Visual Systems</li>
+                        <li>Typography</li>
+                        <li>Layout Design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">📦</div>
+                    <h3>Packaging</h3>
+                    <ul class="skill-list">
+                        <li>Product Packaging</li>
+                        <li>Label Design</li>
+                        <li>Print Production</li>
+                        <li>Material Selection</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">🎬</div>
+                    <h3>Art Direction</h3>
+                    <ul class="skill-list">
+                        <li>Creative Strategy</li>
+                        <li>Campaign Design</li>
+                        <li>Visual Storytelling</li>
+                        <li>Brand Guidelines</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">💼</div>
+                    <h3>Brand Strategy</h3>
+                    <ul class="skill-list">
+                        <li>Brand Positioning</li>
+                        <li>Market Research</li>
+                        <li>Naming</li>
+                        <li>Brand Architecture</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">💬</div>
+                    <h3>Communication</h3>
+                    <ul class="skill-list">
+                        <li>Visual Communication</li>
+                        <li>Presentation Design</li>
+                        <li>Marketing Collateral</li>
+                        <li>Social Media Graphics</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">🖥️</div>
+                    <h3>Digital Design</h3>
+                    <ul class="skill-list">
+                        <li>UX/UI Design</li>
+                        <li>Web Design</li>
+                        <li>Digital Marketing</li>
+                        <li>Motion Graphics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact reveal" id="contact">
+        <div class="contact-content">
+            <h2>Let's Create Something Amazing</h2>
+            <p>Available for freelance projects and full-time opportunities. Let's collaborate and bring your vision to life.</p>
+            <a href="mailto:tanvi.agarwal@email.com" class="btn btn-primary">Start a Conversation</a>
+            
+            <div class="social-links">
+                <a href="https://www.behance.net/tanviagarwal2" target="_blank" class="social-link" title="Behance">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/tanvi-agarwal-a931a4182" target="_blank" class="social-link" title="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/tanviagarwal" target="_blank" class="social-link" title="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://www.pinterest.com/tanviagarwal" target="_blank" class="social-link" title="Pinterest">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Tanvi Agarwal. All rights reserved. Designed with passion and precision.</p>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Hide cursor on mobile
+        if ('ontouchstart' in window) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Progress Bar
+        const progressBar = document.querySelector('.progress-bar');
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = (window.scrollY / documentHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Reveal Animation on Scroll
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Hide scroll indicator after scroll
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.visibility = 'hidden';
+            } else {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.visibility = 'visible';
+            }
+        });
+
+        // Parallax Effect for Hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+                heroContent.style.opacity = 1 - (scrolled / 700);
+            }
+        });
+
+        // Interactive hover effects for project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animate stats on scroll
+        const stats = document.querySelectorAll('.stat-number');
+        let animated = false;
+
+        const animateStats = () => {
+            if (animated) return;
+            
+            const statsSection = document.querySelector('.stats');
+            const rect = statsSection.getBoundingClientRect();
+            
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                animated = true;
+                
+                stats.forEach(stat => {
+                    const target = parseInt(stat.textContent.replace(/[^\d]/g, ''));
+                    let current = 0;
+                    const increment = target / 50;
+                    const suffix = stat.textContent.replace(/[\d,]/g, '');
+                    
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            stat.textContent = Math.ceil(current).toLocaleString() + suffix;
+                            setTimeout(updateCounter, 30);
+                        } else {
+                            stat.textContent = target.toLocaleString() + suffix;
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }
+        };
+
+        window.addEventListener('scroll', animateStats);
+
+        // Add interaction feedback
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        // Add floating animation to background elements
+        const floatingElements = document.querySelectorAll('.floating-bg');
+        floatingElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 2}s`;
+        });
+
+        // Smooth fade-in for images
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.5s ease';
+            
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
+            // Trigger if already loaded
+            if (img.complete) {
+                img.style.opacity = '1';
+            }
+        });
+
+        // Easter egg: konami code
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join('') === konamiPattern.join('')) {
+                document.body.style.animation = 'rainbow 2s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 5000);
+            }
+        });
+
+        // Add rainbow animation for easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Performance optimization: Lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Console message for developers
+        console.log('%c✨ Designed by Tanvi Agarwal', 'font-size: 20px; font-weight: bold; color: #6366F1;');
+        console.log('%cLooking for a Visual Communication Designer? Let\'s talk!', 'font-size: 14px; color: #6B6B6B;');
+    </script>
+</body>
+</html>
+
 
